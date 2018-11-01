@@ -1,0 +1,83 @@
+<script type="text/javascript">
+
+		var url = "https://1cfe1rbii6.execute-api.eu-west-3.amazonaws.com/TODO_WIN/shops/";
+
+		var newShop = {
+  			id: "",
+  			tenand_id: "",
+  			mallid: "",
+        name: "",
+        company_name:"",
+        contact: 
+                {
+                  name:"",
+                  email:"",
+                  telephone:""
+                },
+        averageTime: 0,
+        icon: "",
+        graphical: "",
+        position: 
+                {
+                  lat: "",
+                  lng: ""
+                },
+        reservation: false,
+        maxDiscount: 0.0,
+        site: ""        
+		};
+
+		function queryBuilder () {
+			var idurl = $("#newShopIdInput").val();
+  			var questonmark = "?";
+  			var tenand_id =  $("#newTenantIdInput").val();
+  			var mallid = $("#newMallIdInput").val();
+  			var query_string = url + idurl+"?"+"tenantid="+tenand_id+"&"+"mallid="+mallid;
+  			$("#testResults").val(query_string);
+  			console.log(query_string);
+  			return query_string;
+		}
+
+		function createNewShop() {
+  		// Build product object from inputs
+  			newShop = new Object();
+  			//newShop.id = $("#newShopIdInput").val();
+  			//newShop.tenand_id = $("#newTenantIdInput").val();
+  			//newShop.mallid = $("#newMallIdInput").val();
+  			
+  			shopAdd(newShop);
+  			
+		}
+
+
+
+		function shopAdd(newShop) {
+			//var new_query_string = query_string;
+
+  			$.ajax({
+    		url: queryBuilder(),
+    		type: 'PUT',
+    		contentType: "application/json;charset=utf-8",
+    		data: JSON.stringify(newShop),
+    		success: function (newShop) {
+    		  newShopAddSuccess(newShop);
+    		},
+    		error: function (request, message, error) {
+    		  handleException(request, message, error);
+    			}
+  			});
+  		}
+
+  		function newShopAddSuccess(newShop) {
+			$("#testResults").val("SUCCESS - new shop created");
+			formClear();
+
+		}
+
+		function formClear() {
+  			$("#newShopIdInput").val("");
+  			$("#newTenantIdInput").val("");
+  			$("#newMallIdInput").val("");
+		}		
+
+	</script> 

@@ -1,0 +1,25 @@
+.home
+{
+	background-color: #F0F0F0;
+}
+.center
+{
+	text-align: center;
+}
+.iframepad
+{
+	padding: 2%;
+}
+.forma 
+{
+	padding-right: 50%;
+	padding-left: 5px;
+}
+#errorMessage
+{
+	color: red;
+}
+#results
+{
+	padding: 1%;
+}

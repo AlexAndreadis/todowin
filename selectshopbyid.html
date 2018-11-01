@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>//:TODO_WIN</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class = "forma">
+	<h1>Select shop by id</h1>
+	<h6 id = "errorMessage"></h6>
+	  <div class="form-group">
+	    <label for="shopIdInput"><h5>Shop ID</h5></label>
+	    <input type="text" class="form-control" id="shopIdInput" placeholder="Enter shop ID">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="tenantIdInput"><h5>Tenant ID</h5></label>
+	    <input type="text" class="form-control" id="tenantIdInput" placeholder="Enter tenant ID">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="mallIdInput"><h5>Mall ID</h5></label>
+	    <input type="text" class="form-control" id="mallIdInput" placeholder="Enter mall ID">
+	  </div>
+
+	  <button id = "submitButton" onclick="getShopById(shopIdInput.value, tenantIdInput.value, mallIdInput.value)" type="submit" class="btn btn-primary" target>Submit</button>
+	</div>
+
+<div id = "results" style="display: none;"><h2>Results</h2><br>
+		 <div class="form-group">
+		    <label for="name"><h5>Name</h5></label>
+		    <input type="text" class="form-control" id="name" disabled>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="companyname"><h5>Company Name</h5></label>
+		    <input type="text" class="form-control" id="companyname" disabled>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="mallidoutpout"><h5>Mall ID</h5></label>
+		    <input type="text" class="form-control" id="mallidoutpout" disabled>
+		  </div>
+
+		  <div class="row">
+		    <div class="col">
+		    	<label for="latitude"><h5>Latitude</h5></label>
+		      <input type="text" class="form-control"  id="latitude" disabled>
+		    </div>
+		    <div class="col">
+		    	 <label for="longtitude"><h5>Longtitude</h5></label>
+		      <input type="text" class="form-control"  id="longtitude" disabled>
+		    </div>
+		  </div>
+
+		   <div class="form-group">
+		    <label for="icon"><h5>Icon</h5></label>
+		    <input type="text" class="form-control" id="icon" disabled>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="site"><h5>Site</h5></label>
+		    <input type="text" class="form-control" id="site" disabled>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="graphical"><h5>Graphical</h5></label>
+		    <input type="text" class="form-control" id="graphical" disabled>
+		  </div>
+
+			<div class="form-row">
+			    <div class="form-group col-md-4">
+			      <label for="contactname"><h5>Contact name</h5></label>
+			      <input type="text" class="form-control" id="contactname" disabled> 
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="telephone"><h5>Telephone</h5></label>
+			      <input type="text" class="form-control" id="telephone" disabled>
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="email"><h5>Email</h5></label>
+			      <input type="text" class="form-control" id="email" disabled>
+			    </div>
+			  </div>
+
+			<div class="form-group">
+		    <label for="reservation"><h5>Reservation</h5></label>
+		    <input type="text" class="form-control" id="reservation" disabled>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="maxdiscount"><h5>Max Discount</h5></label>
+		    <input type="text" class="form-control" id="maxdiscount" disabled>
+		  </div>
+		  <div class="form-group">
+		    <label for="averagetime"><h5>Average time</h5></label>
+		    <input type="text" class="form-control" id="averageTimegetime"disabled>
+		  </div>
+		 <br>
+		 <button id = "editButton" onclick="editButton()" type="edit" class="btn btn-primary" target> Edit </button> 
+		 <button id = "saveButton" onclick="saveButton()" type="save" class="btn btn-primary" target disabled="true"> Save </button> 
+</div> 
+
+<script type="text/javascript">
+	var shopid = document.getElementById('shopIdInput').value ;
+	var tenantid = document.getElementById('tenantIdInput').value ;
+	var mallid = document.getElementById('mallIdInput').value ;
+
+	var newShop = {
+  	
+         name: "",
+         company_name:"",
+         contact: 
+                 {
+                   name:"",
+                   email:"",
+                  telephone:""
+                },
+        averageTime: 0,
+        icon: "",
+        graphical: "",
+        position: 
+                 {
+                   lat: "",
+                   lng: ""
+                 },
+       	reservation: false,
+        maxDiscount: 0.0,
+        site: ""        
+		};
+
+	function editButton()
+	{
+
+		$("input").prop('disabled', false);
+		$(':button[type="save"]').prop('disabled', false);
+	}
+
+	function saveButton()
+	{
+			updateShop()
+	}
+
+	function updateShop(shopid, tenantid, mallid)
+	{	
+		var shopid = document.getElementById('shopIdInput').value ;
+		var tenantid = document.getElementById('tenantIdInput').value ;
+		var mallid = document.getElementById('mallIdInput').value ;
+		newShop.averageTime = parseInt($('#averagetime').val());
+		newShop.icon = $('#icon').val();
+		newShop.maxDiscount = parseFloat($('#maxdiscount').val());
+		newShop.site = $('#site').val();
+		newShop.reservation = ("true" === $('#reservation').val());
+		newShop.contact.name = $('#contactname').val();
+		newShop.contact.email = $('#email').val();
+		newShop.contact.telephone = $('#telephone').val();
+		newShop.graphical = $("#graphical").val();
+		newShop.company_name = $("#companyname").val();
+		newShop.name = $("#name").val();
+		newShop.position.lat = parseFloat($('#latitude').val());
+		newShop.position.lng = parseFloat($('#longtitude').val());
+
+		var url = new URL("https://1cfe1rbii6.execute-api.eu-west-3.amazonaws.com/TODO_WIN/shops/"+shopid+"?"+"tenantid="+tenantid+"&"+"mallid="+mallid);
+
+		$.ajax({
+			url: url.href,
+			type: 'PUT',
+			contentType: "application/json;charset=utf-8",
+    		data: JSON.stringify(newShop),
+			success: function(shop){
+				console.log(shop);
+				console.log("successsssssss");
+			},
+			error : function(request, message, error){
+				handleException(request, message, error);
+			}
+
+		});
+
+		
+	}
+
+
+	function getShopById (shopid, tenantid, mallid){
+
+		$('#errorMessage').empty();
+
+		if (shopid == "" || tenantid == "" || mallid ==""){
+				$('#errorMessage').append('Please fill all the form fields.');
+				return false;
+		}
+
+		console.log(shopid, tenantid, mallid);
+		var url = new URL("https://1cfe1rbii6.execute-api.eu-west-3.amazonaws.com/TODO_WIN/shops/"+shopid+"?"+"tenantid="+tenantid+"&"+"mallid="+mallid);
+
+		$.ajax({
+			url: url.href,
+			type: 'GET',
+			dataType: 'json',
+			success: function(shop){
+				shopAddRow(shop);
+			},
+			error : function(request, message, error){
+				handleException(request, message, error);
+			}
+
+		});
+		console.log("trele12es");
+	}
+	function shopAddRow (shop){
+		$(".here").append("<table class='there'></table>");
+		console.log("shopaddrow");
+		$(".there").append(shopBuildTableRow(shop));
+	}
+	function shopBuildTableRow (shop){
+		
+		$('#averagetime').val(shop.averageTime);
+		$('#maxdiscount').val(shop.maxDiscount);
+		$('#telephone').val(shop.contact.telephone);
+		$("#companyname").val(shop.company_name);
+		$("#name").val(shop.name);
+		$("#mallidoutpout").val(shop.mall_id);
+		$("#icon").val(shop.icon);
+		$("#graphical").val(shop.graphical);
+		$('#site').val(shop.site);
+		$('#latitude').val(shop.position.lat);
+		$('#longtitude').val(shop.position.lng);
+		$('#contactname').val(shop.contact.name);
+		$('#email').val(shop.contact.email);
+		$('#reservation').val(shop.reservation);
+		showHide();
+	}
+	function handleException(request, message,
+                         error) {
+		  var msg = "";
+		  msg += "Code: " + request.status + "\n";
+		  msg += "Text: " + request.statusText + "\n";
+		  if (request.responseJSON != null) {
+		    msg += "Message" +
+		        request.responseJSON.Message + "\n";
+		  }
+		  alert(msg);
+	}
+
+	function showHide() {
+    	$("#results").show();
+	}
+</script>
+</body>
