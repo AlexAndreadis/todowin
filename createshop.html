@@ -1,1 +1,215 @@
-<h1>Create shop</h1>
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<title>//:TODO_WIN</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Jquery 1.12.4 and bootstrap 4.0.0 -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	
+</head>
+<body>
+
+	<div class = "forma">
+
+		<h3 id="h3hide">Create a new Shop</h2>
+	
+		<h6 id = "errorMessage"></h6>
+	
+	</div>
+
+	<div id="newshopform">
+		<div class = "form-row">
+			<div class="form-group col-md-4">
+		    	<label for="newShopId"><h5>Shop ID</h5></label>
+		    	<input type="text" class="form-control" id="newShopId" placeholder="Enter shop ID">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="newShopTenantId"><h5>Tenant ID</h5></label>
+				<input type="text" class="form-control" id="newShopTenantId" placeholder="Enter tenant ID">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="newShopMallId"><h5>Mall ID</h5></label>
+				<input type="text" class="form-control" id="newShopMallId" placeholder="Enter mall ID">
+			</div>
+		</div>
+
+		<div class = "form-row">
+			<div class="col">
+				<label for="newShopName"><h5>Name</h5></label>
+				<input type="text" class="form-control" id="newShopName">
+			</div>
+
+			<div class="col">
+				<label for="newShopCompanyName"><h5>Company Name</h5></label>
+				<input type="text" class="form-control" id="newShopCompanyName">
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col">
+				<label for="newShopLatitude"><h5>Latitude</h5></label>
+		    	<input type="text" class="form-control"  id="newShopLatitude">
+		    </div>
+		    <div class="form-group col">
+		    	<label for="newShopLongtitude"><h5>Longtitude</h5></label>
+		    	<input type="text" class="form-control"  id="newShopLongtitude">
+		    </div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col">
+				<label for="newShopIcon"><h5>Icon</h5></label>
+				<input type="text" class="form-control" id="newShopIcon">
+			</div>
+
+			<div class="form-group col">
+				<label for="newShopSite"><h5>Site</h5></label>
+				<input type="text" class="form-control" id="newShopSite">
+			</div>
+			<div class="form-group col">
+				<label for="newShopGraphical"><h5>Graphical</h5></label>
+				<input type="text" class="form-control" id="newShopGraphical">
+			</div>
+		</div>	
+
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="newShopContactName"><h5>Contact name</h5></label>
+				<input type="text" class="form-control" id="newShopContactName"> 
+			</div>
+			<div class="form-group col-md-4">
+				<label for="newShopTelephone"><h5>Telephone</h5></label>
+				<input type="text" class="form-control" id="newShopTelephone">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="newShopEmail"><h5>Email</h5></label>
+				<input type="text" class="form-control" id="newShopEmail">
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="newShopReservation"><h5>Reservation</h5></label>
+				<input type="text" class="form-control" id="newShopReservation">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="newShopMaxDiscount"><h5>Max Discount</h5></label>
+				<input type="text" class="form-control" id="newShopMaxDiscount">
+			</div>
+
+			<div class="form-group col-md-4">
+				<label for="newShopAverageTime"><h5>Average time</h5></label>
+				<input type="text" class="form-control" id="newShopAverageTime">
+			</div>
+		</div>
+
+		 <br>
+
+		<button id = "addNewShopButton" onclick="createNewShop()" type="save" class="btn btn-primary">Add New Shop</button> 
+	</div> 
+
+
+	<script type="text/javascript">
+
+		var url = "https://1cfe1rbii6.execute-api.eu-west-3.amazonaws.com/TODO_WIN/shops/";
+
+		var newShop = {
+		id: "",	
+  		tenand_id: "",
+  		mall_id: "",
+        name: "",
+        company_name:"",
+        contact: 
+        	{
+                name:"",
+                email:"",
+                telephone:""
+            },
+        averageTime: 0,
+        icon: "",
+        graphical: "",
+        position: 
+            {
+                lat: "",
+            	lng: ""
+            },
+       	reservation: false,
+        maxDiscount: 0.0,
+        site: ""
+
+		};
+
+		function createNewShop() {
+  		// Build product object from inputs
+  		console.log("HERE");
+
+  		newShop.id = document.getElementById('newShopId').value ;
+		newShop.tenand_id = document.getElementById('newShopTenantId').value ;
+		newShop.mall_id = document.getElementById('newShopMallId').value ;
+		newShop.averageTime = parseInt($('#newShopAverageTime').val());
+		newShop.icon = $('#newShopIcon').val();
+		newShop.maxDiscount = parseFloat($('#newShopMaxDiscount').val());
+		newShop.site = $('#newShopSite').val();
+		newShop.reservation = ("true" === $('#newShopReservation').val());
+		newShop.contact.name = $('#newShopContactName').val();
+		newShop.contact.email = $('#newShopEmail').val();
+		newShop.contact.telephone = $('#newShopTelephone').val();
+		newShop.graphical = $("#newShopGraphical").val();
+		newShop.company_name = $("#newShopCompanyName").val();
+		newShop.name = $("#newShopName").val();
+		newShop.position.lat = parseFloat($('#newShopLatitude').val());
+		newShop.position.lng = parseFloat($('#newShopLongtitude').val());
+
+  		console.log ("JSON:")
+  		console.log(newShop);
+  		addNewShop(newShop);
+  		$("#newshopform").hide();
+  		$("#h3hide").hide();
+  			
+		}
+
+		function addNewShop(newShop) {
+
+  			$.ajax({
+    		url: url,
+    		type: 'POST',
+    		contentType: "application/json;charset=utf-8",
+    		data: JSON.stringify(newShop),
+    		success: function (newShop) {
+    		  newShopAddSuccess(newShop);
+    		},
+    		error: function (request, message, error) {
+    		  handleException(request, message, error);
+    			}
+  			});
+  		}
+
+  		function newShopAddSuccess(newShop) {
+			console.log("SUCCESS - new shop created");
+			console.log(newShop);
+			formClear();
+
+		}
+
+		function formClear() {
+  			$("#newShopIdInput").val("");
+  			$("#newTenantIdInput").val("");
+  			$("#newMallIdInput").val("");
+		}
+
+	</script>
+
+</body>		
