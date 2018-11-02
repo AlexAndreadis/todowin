@@ -17,68 +17,68 @@
 
 </head>
 <body>
+<div id="successMessage">
+	
+</div>
 <div class = "forma">
 	<h3>View a Shop</h3>
-	<h6 id = "errorMessage"></h6>
-	  <div class="form-group">
+
+	<div id = "errorMessage"></div>
+
+	<div class= "form-row">
+	  <div class="form-group col-md-4">
 	    <label for="shopIdInput"><h5>Shop ID</h5></label>
-	    <input type="text" class="form-control" id="shopIdInput" placeholder="Enter shop ID">
+	    <input type="text" class="form-control" id="shopIdInput" placeholder="Required">
 	  </div>
 
-	  <div class="form-group">
+	  <div class="form-group col-md-4">
 	    <label for="tenantIdInput"><h5>Tenant ID</h5></label>
-	    <input type="text" class="form-control" id="tenantIdInput" placeholder="Enter tenant ID">
+	    <input type="text" class="form-control" id="tenantIdInput" placeholder="Required">
 	  </div>
 
-	  <div class="form-group">
+	  <div class="form-group col-md-4">
 	    <label for="mallIdInput"><h5>Mall ID</h5></label>
-	    <input type="text" class="form-control" id="mallIdInput" placeholder="Enter mall ID">
+	    <input type="text" class="form-control" id="mallIdInput" placeholder="Required">
 	  </div>
+	</div>
 
 	  <button id = "submitButton" onclick="getShopById(shopIdInput.value, tenantIdInput.value, mallIdInput.value)" type="submit" class="btn btn-primary" target>Submit</button>
 	</div>
 
-<div id = "results" style="display: none;"><h2>Results</h2><br>
-		 <div class="form-group">
+<div id = "results" style="display: none;"><h4>You can edit the Shop down here.</h4><br>
+	<div class= "form-row">
+		 <div class="form-group col-md-4">
 		    <label for="name"><h5>Name</h5></label>
 		    <input type="text" class="form-control" id="name" disabled>
 		  </div>
 
-		  <div class="form-group">
+		  <div class="form-group col-md-4">
 		    <label for="companyname"><h5>Company Name</h5></label>
 		    <input type="text" class="form-control" id="companyname" disabled>
 		  </div>
 
-		  <div class="form-group">
+		  <div class="form-group col-md-4">
 		    <label for="mallidoutpout"><h5>Mall ID</h5></label>
 		    <input type="text" class="form-control" id="mallidoutpout" disabled>
 		  </div>
+	</div>
 
-		  <div class="row">
-		    <div class="col">
-		    	<label for="latitude"><h5>Latitude</h5></label>
-		      <input type="text" class="form-control"  id="latitude" disabled>
-		    </div>
-		    <div class="col">
-		    	 <label for="longtitude"><h5>Longtitude</h5></label>
-		      <input type="text" class="form-control"  id="longtitude" disabled>
-		    </div>
-		  </div>
-
-		   <div class="form-group">
+	<div class= "form-row">
+		   <div class="form-group col-md-4" >
 		    <label for="icon"><h5>Icon</h5></label>
 		    <input type="text" class="form-control" id="icon" disabled>
 		  </div>
 
-		  <div class="form-group">
+		  <div class="form-group col-md-4">
 		    <label for="site"><h5>Site</h5></label>
 		    <input type="text" class="form-control" id="site" disabled>
 		  </div>
 
-		  <div class="form-group">
+		  <div class="form-group col-md-4">
 		    <label for="graphical"><h5>Graphical</h5></label>
 		    <input type="text" class="form-control" id="graphical" disabled>
 		  </div>
+	</div>
 
 			<div class="form-row">
 			    <div class="form-group col-md-4">
@@ -87,7 +87,7 @@
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="telephone"><h5>Telephone</h5></label>
-			      <input type="text" class="form-control" id="telephone" disabled>
+			      <input type="text" class="form-control" id="telephone" disabled maxlength="10">
 			    </div>
 			    <div class="form-group col-md-4">
 			      <label for="email"><h5>Email</h5></label>
@@ -95,19 +95,33 @@
 			    </div>
 			  </div>
 
-			<div class="form-group">
+	<div class = "form-row">
+			<div class="form-group col-md-4">
 		    <label for="reservation"><h5>Reservation</h5></label>
-		    <input type="text" class="form-control" id="reservation" disabled>
+		  	<input type="text" class="form-control" id="reservation" disabled>
+ 		  </div>
+
+		  <div class="form-group col-md-4">
+		    <label for="maxdiscount"><h5>Max Discount</h5></label>
+		    <input type="text" class="form-control" onkeypress="return isNumberKey(event)" id="maxdiscount" disabled maxlength="3">
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="averagetime"><h5>Average time</h5></label>
+		    <input type="text" class="form-control" onkeypress="return isNumberKey(event)" id="averagetime"disabled maxlength="3">
+		  </div>
+	</div>
+		  
+		  <div class="form-row">
+		    <div class="col">
+		    	<label for="latitude"><h5>Latitude</h5></label>
+		      <input type="text" class="form-control"  onkeypress="return isNumberKey(event)" id="latitude" disabled maxlength="10">
+		    </div>
+		    <div class="col">
+		    	 <label for="longtitude"><h5>Longtitude</h5></label>
+		      <input type="text" class="form-control" onkeypress="return isNumberKey(event)"  id="longtitude" disabled maxlength="10">
+		    </div>
 		  </div>
 
-		  <div class="form-group">
-		    <label for="maxdiscount"><h5>Max Discount</h5></label>
-		    <input type="text" class="form-control" id="maxdiscount" disabled>
-		  </div>
-		  <div class="form-group">
-		    <label for="averagetime"><h5>Average time</h5></label>
-		    <input type="text" class="form-control" id="averagetime"disabled>
-		  </div>
 		 <br>
 		 <button id = "editButton" onclick="editButton()" type="edit" class="btn btn-primary" target> Edit </button> 
 		 <button id = "saveButton" onclick="saveButton()" type="save" class="btn btn-primary" target disabled="true"> Save </button> 
@@ -122,6 +136,7 @@
   	
          name: "",
          company_name:"",
+         mallid: "",
          contact: 
                  {
                    name:"",
@@ -143,22 +158,21 @@
 
 	function editButton()
 	{
-
-		$("input").prop('disabled', false);
+		$('input[type = "text"]').prop('disabled', false);
 		$(':button[type="save"]').prop('disabled', false);
 	}
 
 	function saveButton()
 	{
 			updateShop()
+			hide()
 	}
 
 	function updateShop(shopid, tenantid, mallid)
 	{	
 		var shopid = document.getElementById('shopIdInput').value ;
 		var tenantid = document.getElementById('tenantIdInput').value ;
-		var mallid = document.getElementById('mallIdInput').value ;
-		newShop.mall_id
+		var mallid = document.getElementById('mallidoutpout').value ;	
 		newShop.averageTime = parseInt($('#averagetime').val());
 		newShop.icon = $('#icon').val();
 		newShop.maxDiscount = parseFloat($('#maxdiscount').val());
@@ -173,6 +187,7 @@
 		newShop.position.lat = parseFloat($('#latitude').val());
 		newShop.position.lng = parseFloat($('#longtitude').val());
 
+
 		var url = new URL("https://1cfe1rbii6.execute-api.eu-west-3.amazonaws.com/TODO_WIN/shops/"+shopid+"?"+"tenantid="+tenantid+"&"+"mallid="+mallid);
 
 		$.ajax({
@@ -182,24 +197,21 @@
     		data: JSON.stringify(newShop),
 			success: function(shop){
 				console.log(shop);
-				console.log("successsssssss");
+				handleSuccess(shop);
 			},
 			error : function(request, message, error){
 				handleException(request, message, error);
 			}
 
-		});
-
-		
+		});	
 	}
-
 
 	function getShopById (shopid, tenantid, mallid){
 
 		$('#errorMessage').empty();
 
 		if (shopid == "" || tenantid == "" || mallid ==""){
-				$('#errorMessage').append('Please fill all the form fields.');
+				$('#errorMessage').append('<div class =\"alert\" > Please fill all the form fields. </div>');
 				return false;
 		}
 
@@ -226,7 +238,7 @@
 		$(".there").append(shopBuildTableRow(shop));
 	}
 	function shopBuildTableRow (shop){
-		
+
 		$('#averagetime').val(shop.averageTime);
 		$('#maxdiscount').val(shop.maxDiscount);
 		$('#telephone').val(shop.contact.telephone);
@@ -243,25 +255,47 @@
 		$('#reservation').val(shop.reservation);
 		showHide();
 	}
-	function handleException(request, message,
-                         error) {
-		  var msg = "";
-		  msg += "Code: " + request.status + "\n";
-		  msg += "Text: " + request.statusText + "\n";
-		  if (request.responseJSON != null) {
-		    msg += "Message" +
-		        request.responseJSON.Message + "\n";
-		  }
-		  alert(msg);
-	}
+
 
 	function showHide() {
     	$("#results").show();
 	}
+
+	function hide(){
+		$("#results").hide();
+		
+	}
+
+		// checks if it is number, doesnt allow letters and symbols
+	function isNumberKey(evt)
+		{
+			var charCode = (evt.which) ? evt.which : evt.keyCode;
+			if (charCode != 46 && charCode > 31 
+			&& (charCode < 48 || charCode > 57))
+			return false;
+			return true;
+		}  
+		function handleException(request, message,
+	                         error) {
+		$("#errorMessage").empty();
+		var base0 = "<div class=\"alert\" id=\"base0\">";
+		var error0 = "<span id=\"base1\" class=\"closebtn\" onclick=\"this.parentElement.style.display=\'none\'\;\">&times\;" ;
+		var error1 = "Error: " + request.responseJSON.message;
+		$("#errorMessage").append(base0);
+		$("#base0").append(error0);
+		$("#base1").append(error1);
+	}
+
+	function handleSuccess (shop)
+	{
+			$("#successMessage").empty();
+			var base3 = "<div class=\"success\" id=\"base3\">";
+			var success = "<center>Shop updated!</center>"
+			$("#successMessage").append(base3);
+			$("#base3").append(success);
+	}
+
+
 </script>
-<!-- <script>
-	$(document).ready(function () {
- 	getShopById();
-});
-</script> -->
+
 </body>

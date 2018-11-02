@@ -19,29 +19,30 @@
 </head>
 <body>
 
+	<div id="successMessage"></div>
 	<div class = "forma">
 
 		<h3 id="h3hide">Create a new Shop</h2>
-	
-		<h6 id = "errorMessage"></h6>
-	
+
+		<div id = "errorMessage"></div>
+
 	</div>
 
 	<div id="newshopform">
 		<div class = "form-row">
 			<div class="form-group col-md-4">
 		    	<label for="newShopId"><h5>Shop ID</h5></label>
-		    	<input type="text" class="form-control" id="newShopId" placeholder="Enter shop ID">
+		    	<input type="text" class="form-control" id="newShopId" placeholder="Required">
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="newShopTenantId"><h5>Tenant ID</h5></label>
-				<input type="text" class="form-control" id="newShopTenantId" placeholder="Enter tenant ID">
+				<input type="text" class="form-control" id="newShopTenantId" placeholder="Required">
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="newShopMallId"><h5>Mall ID</h5></label>
-				<input type="text" class="form-control" id="newShopMallId" placeholder="Enter mall ID">
+				<input type="text" class="form-control" id="newShopMallId" placeholder="Required">
 			</div>
 		</div>
 
@@ -58,27 +59,16 @@
 		</div>
 
 		<div class="form-row">
-			<div class="form-group col">
-				<label for="newShopLatitude"><h5>Latitude</h5></label>
-		    	<input type="text" class="form-control"  id="newShopLatitude">
-		    </div>
-		    <div class="form-group col">
-		    	<label for="newShopLongtitude"><h5>Longtitude</h5></label>
-		    	<input type="text" class="form-control"  id="newShopLongtitude">
-		    </div>
-		</div>
-
-		<div class="form-row">
-			<div class="form-group col">
+			<div class="form-group col-md-4">
 				<label for="newShopIcon"><h5>Icon</h5></label>
 				<input type="text" class="form-control" id="newShopIcon">
 			</div>
 
-			<div class="form-group col">
+			<div class="form-group col-md-4">
 				<label for="newShopSite"><h5>Site</h5></label>
 				<input type="text" class="form-control" id="newShopSite">
 			</div>
-			<div class="form-group col">
+			<div class="form-group col-md-4">
 				<label for="newShopGraphical"><h5>Graphical</h5></label>
 				<input type="text" class="form-control" id="newShopGraphical">
 			</div>
@@ -91,7 +81,7 @@
 			</div>
 			<div class="form-group col-md-4">
 				<label for="newShopTelephone"><h5>Telephone</h5></label>
-				<input type="text" class="form-control" id="newShopTelephone">
+				<input type="text" class="form-control" id="newShopTelephone" maxlength="10">
 			</div>
 			<div class="form-group col-md-4">
 				<label for="newShopEmail"><h5>Email</h5></label>
@@ -102,18 +92,32 @@
 		<div class="form-row">
 			<div class="form-group col-md-4">
 				<label for="newShopReservation"><h5>Reservation</h5></label>
-				<input type="text" class="form-control" id="newShopReservation">
+				<select type="text" class="form-control" id="newShopReservation"> 
+					<option>true</option>
+      				<option>false</option>
+				</select>
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="newShopMaxDiscount"><h5>Max Discount</h5></label>
-				<input type="text" class="form-control" id="newShopMaxDiscount">
+				<input type="text" class="form-control" onkeypress="return isNumberKey(event)"   id="newShopMaxDiscount" maxlength="3">
 			</div>
 
 			<div class="form-group col-md-4">
 				<label for="newShopAverageTime"><h5>Average time</h5></label>
-				<input type="text" class="form-control" id="newShopAverageTime">
+				<input type="text" class="form-control" onkeypress="return isNumberKey(event)" id="newShopAverageTime" maxlength="3">
 			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col">
+				<label for="newShopLatitude"><h5>Latitude</h5></label>
+		    	<input type="text" class="form-control" id="newShopLatitude" onkeypress="return isNumberKey(event)" maxlength="10">
+		    </div>
+		    <div class="form-group col">
+		    	<label for="newShopLongtitude"><h5>Longtitude</h5></label>
+		    	<input type="text" class="form-control"  id="newShopLongtitude" onkeypress="return isNumberKey(event)" maxlength="10">
+		    </div>
 		</div>
 
 		 <br>
@@ -176,9 +180,6 @@
   		console.log ("JSON:")
   		console.log(newShop);
   		addNewShop(newShop);
-  		$("#newshopform").hide();
-  		$("#h3hide").hide();
-  			
 		}
 
 		function addNewShop(newShop) {
@@ -190,6 +191,7 @@
     		data: JSON.stringify(newShop),
     		success: function (newShop) {
     		  newShopAddSuccess(newShop);
+    		  handleSuccess(newShop)
     		},
     		error: function (request, message, error) {
     		  handleException(request, message, error);
@@ -200,7 +202,7 @@
   		function newShopAddSuccess(newShop) {
 			console.log("SUCCESS - new shop created");
 			console.log(newShop);
-			formClear();
+			hide()
 
 		}
 
@@ -208,6 +210,42 @@
   			$("#newShopIdInput").val("");
   			$("#newTenantIdInput").val("");
   			$("#newMallIdInput").val("");
+		}
+
+		function isNumberKey(evt)
+			{
+				var charCode = (evt.which) ? evt.which : evt.keyCode;
+				if (charCode != 46 && charCode > 31 
+				&& (charCode < 48 || charCode > 57))
+				return false;
+				return true;
+			}  
+		
+		
+		function handleException(request, message,
+		                         error) {
+			$("#errorMessage").empty();
+			var base0 = "<div class=\"alert\" id=\"base0\">";
+			var error0 = "<span id=\"base1\" class=\"closebtn\" onclick=\"this.parentElement.style.display=\'none\'\;\">&times\;" ;
+			var error1 = "Error: " + request.responseJSON.message;
+			$("#errorMessage").append(base0);
+			$("#base0").append(error0);
+			$("#base1").append(error1);
+		}
+
+		function handleSuccess (newShop)
+		{
+			$("#successMessage").empty();
+			var base3 = "<div class=\"success\" id=\"base3\">";
+			var success = "<center>Shop created!</center>"
+			$("#successMessage").append(base3);
+			$("#base3").append(success);
+		}
+
+		function hide()
+		{
+			$("#newshopform").hide();
+			$(".forma").hide();
 		}
 
 	</script>
